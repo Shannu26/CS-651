@@ -7,7 +7,7 @@
 </head>
 <body>
 	<h1>Welcome to the Invitation System Website</h1>
-	<form>
+	<form id="event-form">
 		<span>
 			<label for="name">Event Name:</label>
 			<input type="text" id="name"/>
@@ -29,8 +29,10 @@
 			<textarea rows="10" cols="50" id="description"></textarea>
 		</span>
 		<input type="submit" value="Submit">
-		<button>Attend</button>
-		<button>Not Attend</button>
 	</form>
+	<button>Attend</button>
+	<button>Not Attend</button>
+	
+	<script src="./FormHandler.js"></script>
 </body>
 </html>
