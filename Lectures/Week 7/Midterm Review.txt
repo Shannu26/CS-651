@@ -1,0 +1,13 @@
+
+There are 22 multiple choice and True/False questions to total 30 points. You need to use the Respondus LockDown browser however NO camera is required. The exam can only be taken one time. You have one hour to take it. Read the questions carefully, think about your answers and take your time to select clear responses. The exam is closed book, closed notes, closed Internet, closed cell phone.
+
+The exam content is broken out as follows:
+
+    1 CSS Style Sheet Concepts
+    1 JavaScript Concepts
+    5 HTML - tables, forms, common tags
+    8 Servlets Concepts
+    6 JSP Concepts
+    1 Session Data Concepts
+
+No code writing but you need to be familiar with coding methods and features of servlets and JSP pages.

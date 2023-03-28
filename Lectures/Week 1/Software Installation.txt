@@ -1,0 +1,36 @@
+Installation of Apache Tomcat in Eclipse to run JSP and Servlets
+
+1. Download and install: Java JDK (if you don't have it installed already)
+2. Download and install: Eclipse IDE for for Enterprise Java and Web Developers
+3. Download: Apache/Tomcat - http://tomcat.apache.org - Just need the binary option
+4. Uncompress and move the Apache folder to your file system. There is no install
+
+You are now done with the install. Now, test it out to make sure all is working.
+
+1. Open Eclipse, create a new project - Dynamic Web Project, call it "Hello" or something
+2. Click "New Runtime," select open Apache, select the version you downloaded,
+   click button that reads, "Create a new local server," click next.
+3. Click on "Browse" to find the Tomcat installation directory for Apache, 
+   leave JRE alone, click finish
+4. You should now see a "Servers" folder in the Project Explorer. 
+   Don't touch or remove this folder.
+5. Run your "Hello" project, select "Run on Server"
+6. Choose an Existing server, open "localhost" and select your Tomcat server.
+7. It's normal to get a HTTP Status 404 - Not Found since the template project is empty.
+8. Lets make it work. 
+   A. Click File->New and add a new JSP file (towards the bottom of the menu)
+   B. Put it on the "Hello/src.main/webapp" folder, give it a name, click finish
+   C. Add some text to the body section of the HTML code
+   D. Right-click on the Hello.jsp file and select "Run As" and then "Run on Server"
+   E. Your web browser will open and run your jsp file. 
+   F. Congratulations, you are now ready for some web application development!
+
+
+The configuration I'm running on MacOS, Mojave is:
+
+Java JDK version 17
+Eclipse "2021-12"
+Apache version 9
+
+Your default web browser will open. If you want to change the web browser that Eclipse uses, open the Eclipse "Preferences," click on "General" and find "Web Browser" towards the bottom of the list. Select a different web browser.
+

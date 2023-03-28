@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Invitation System</title>
-<link rel="stylesheet" href="./FormHandler.css">
-</head>
-<body>
-	<h1>Welcome to the Invitation System Website</h1>
-	<form id="event-form">
-		<span>
-			<label for="name">Event Name:</label>
-			<input type="text" id="name"/>
-		</span>
-		<span>
-			<label for="date">Event Date:</label>
-			<input type="date" id="date"/>
-		</span>
-		<span>
-			<label for="time">Event Time:</label>
-			<input type="time" id="time"/>
-		</span>
-		<span>
-			<label for="location">Event Location:</label>
-			<input type="text" id="location"/>
-		</span>
-		<span>
-			<label for="description">Event Description:</label>
-			<textarea rows="10" cols="50" id="description"></textarea>
-		</span>
-		<input type="submit" value="Submit">
-	</form>
-	<button>Attend</button>
-	<button>Not Attend</button>
-	
-	<script src="./FormHandler.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Invitation System Project</title>
+    <link rel="stylesheet" href="./FormHandler.css" />
+  </head>
+  <body>
+    <h1>Invitation System</h1>
+    <form action="#" onsubmit="required()" method="post" id="event-form">
+      <div>
+        <label>Event Name:</label>
+        <input type="text" id="name" value="" />
+      </div>
+      <div>
+        <label>Event Date:</label>
+        <input type="date" id="date" value="" />
+      </div>
+      <div>
+        <label>Event Time:</label>
+        <input type="time" id="time" value="" />
+      </div>
+      <div>
+        <label>Event Location:</label>
+        <input type="text" id="location" value="" />
+      </div>
+      <div>
+        <label>Event Description:</label>
+        <textarea id="description" rows="4" cols="10"></textarea>
+      </div>
+
+      <div>
+        <label>Want to attend the Event?</label>
+        <input
+          id="Attend"
+          type="radio"
+          name="attending"
+          value="Yes"
+          class="radio"
+        />Attend
+        <input
+          id="Not_Attend"
+          type="radio"
+          name="attending"
+          value="No"
+          class="radio"
+        />Not Attend
+      </div>
+
+      <div>
+        <input type="submit" value="Submit" class="btn" />
+      </div>
+    </form>
+
+    <script src="./FormHandler.js"></script>
+  </body>
 </html>
