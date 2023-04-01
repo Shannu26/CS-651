@@ -1,7 +1,3 @@
-/**
- *
- */
-
 const formElement = document.getElementById("event-form");
 const eventNameElement = document.getElementById("name");
 const eventTimeElement = document.getElementById("time");
@@ -36,15 +32,19 @@ const validateForm = () => {
       "Time and Date of the Event should be in Future Date and Time but not in Past"
     );
   else {
-    eventNameElement.value = "";
-    eventDateElement.value = "";
-    eventTimeElement.value = "";
-    eventLocationElement.value = "";
-    eventDescriptionElement.value = "";
-    for (var i = 0; i < eventAttendElements.length; i++) {
-      eventAttendElements[i].checked = false;
-    }
+    clearInputElements();
     alert("Event has been successfully registered");
+  }
+};
+
+const clearInputElements = () => {
+  eventNameElement.value = "";
+  eventDateElement.value = "";
+  eventTimeElement.value = "";
+  eventLocationElement.value = "";
+  eventDescriptionElement.value = "";
+  for (var i = 0; i < eventAttendElements.length; i++) {
+    eventAttendElements[i].checked = false;
   }
 };
 
