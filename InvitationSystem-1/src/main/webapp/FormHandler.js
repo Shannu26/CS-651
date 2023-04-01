@@ -7,14 +7,15 @@ const eventDescriptionElement = document.getElementById("description");
 const eventAttendElements = document.getElementsByName("attending");
 var eventAttendanceStatus = "";
 
- formElement.addEventListener("submit", (event) => {
+formElement.addEventListener("submit", (event) => {
+  event.preventDefault();
   for (var i = 0; i < eventAttendElements.length; i++) {
     if (eventAttendElements[i].checked) {
       eventAttendanceStatus = eventAttendElements[i].value;
     }
   }
-  if(!validateForm()) event.preventDefault();
- });
+  validateForm();
+});
 
 const validateForm = () => {
   if (eventNameElement.value == "") alert("Please specify the Event Name");
@@ -31,10 +32,9 @@ const validateForm = () => {
       "Time and Date of the Event should be in Future Date and Time but not in Past"
     );
   else {
-    return true;
+    clearInputElements();
+    alert("Event has been successfully registered");
   }
-  
-  return false;
 };
 
 const clearInputElements = () => {
