@@ -2,11 +2,6 @@ h1 {
   text-align: center;
 }
 
-#eventDetails{
-	display: inline;
-	color: red;
-}
-
 form-container {
   height: 100%;
 }

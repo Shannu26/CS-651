@@ -4,15 +4,8 @@ const eventTimeElement = document.getElementById("time");
 const eventDateElement = document.getElementById("date");
 const eventLocationElement = document.getElementById("location");
 const eventDescriptionElement = document.getElementById("description");
-const eventAttendElements = document.getElementsByName("attending");
-var eventAttendanceStatus = "";
 
  formElement.addEventListener("submit", (event) => {
-  for (var i = 0; i < eventAttendElements.length; i++) {
-    if (eventAttendElements[i].checked) {
-      eventAttendanceStatus = eventAttendElements[i].value;
-    }
-  }
   if(!validateForm()) event.preventDefault();
  });
 
@@ -24,8 +17,6 @@ const validateForm = () => {
     alert("Please specify the Event Location");
   else if (eventDescriptionElement.value == "")
     alert("Please describe about the Event in a few words");
-  else if (eventAttendanceStatus == "")
-    alert("Please select whether you want to attend the event or not");
   else if (validateEventDateAndTime() < 0)
     alert(
       "Time and Date of the Event should be in Future Date and Time but not in Past"
@@ -43,9 +34,6 @@ const clearInputElements = () => {
   eventTimeElement.value = "";
   eventLocationElement.value = "";
   eventDescriptionElement.value = "";
-  for (var i = 0; i < eventAttendElements.length; i++) {
-    eventAttendElements[i].checked = false;
-  }
 };
 
 const validateEventDateAndTime = () => {
