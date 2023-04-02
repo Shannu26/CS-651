@@ -46,50 +46,58 @@ public class FormHandlerServlet extends HttpServlet {
 		String eventAttendance = request.getParameter("attending");
 		
 		PrintWriter out = response.getWriter();
+		out.print("<!DOCTYPE html>\n"
+				+ "<html>\n"
+				+ "  <head>\n"
+				+ "    <meta charset=\"UTF-8\" />\n"
+				+ "    <title>Invitation System Project</title>\n"
+				+ "    <link rel=\"stylesheet\" href=\"./FormHandler.css\" />\n"
+				+ "  </head>\n"
+				+ "  <body>\n"
+				+ "    <h1>Event Details</h1>\n"
+				+ "    <div class=\"form-container\">\n"
+				+ "      <form action=\"FormHandlerServlet\" method=\"POST\" id=\"event-form\">\n"
+				+ "        <div>\n"
+				+ "          <label>Event Name:</label>"
+				+ "          <p id=\"eventDetails\">" + eventName + "</p>\n"
+				+ "			 <input type=\"text\" name=\"event_name\" value=" + eventName + " hidden />\n"	
+				+ "        </div>\n"
+				+ "        <div>\n"
+				+ "          <label>Event Date:</label>"
+				+ "          <p id=\"eventDetails\">" + eventDate + "</p>\n"
+				+ "			 <input type=\"date\" name=\"event_date\" value=" + eventDate + " hidden />\n"
+				+ "        </div>\n"
+				+ "        <div>\n"
+				+ "          <label>Event Time:</label>"
+				+ "          <p id=\"eventDetails\">" + eventTime + "</p>\n"
+				+ "			 <input type=\"time\" name=\"event_time\" value=" + eventTime + " hidden />\n"
+				+ "        </div>\n"
+				+ "        <div>\n"
+				+ "          <label>Event Location:</label>"
+				+ "          <p id=\"eventDetails\">" + eventLocation + "</p>\n"
+				+ "			 <input type=\"text\" name=\"event_location\" value=" + eventLocation + " hidden />\n"
+				+ "        </div>\n"
+				+ "        <div>\n"
+				+ "          <label>Event Description:</label>"
+				+ "          <p id=\"eventDetails\">" + eventDescription + "</p>\n"
+				+ "			 <textarea name=\"event_description\" hidden>" + eventDescription + "</textarea>\n"
+				+ "        </div>\n"
+				+ "\n"
+				);
+		
 		if(eventAttendance == null) {
-			out.print("<!DOCTYPE html>\n"
-					+ "<html>\n"
-					+ "  <head>\n"
-					+ "    <meta charset=\"UTF-8\" />\n"
-					+ "    <title>Invitation System Project</title>\n"
-					+ "    <link rel=\"stylesheet\" href=\"./FormHandler.css\" />\n"
-					+ "  </head>\n"
-					+ "  <body>\n"
-					+ "    <h1>Event Details</h1>\n"
-					+ "    <div class=\"form-container\">\n"
-					+ "      <form action=\"FormHandlerServlet\" method=\"POST\" id=\"event-form\">\n"
-					+ "        <div>\n"
-					+ "          <label>Event Name:</label>"
-					+ "          <p id=\"eventDetails\">" + eventName + "</p>"
-					+ "        </div>\n"
-					+ "        <div>\n"
-					+ "          <label>Event Date:</label>"
-					+ "          <p id=\"eventDetails\">" + eventDate + "</p>"
-					+ "        </div>\n"
-					+ "        <div>\n"
-					+ "          <label>Event Time:</label>"
-					+ "          <p id=\"eventDetails\">" + eventTime + "</p>"
-					+ "        </div>\n"
-					+ "        <div>\n"
-					+ "          <label>Event Location:</label>"
-					+ "          <p id=\"eventDetails\">" + eventLocation + "</p>"
-					+ "        </div>\n"
-					+ "        <div>\n"
-					+ "          <label>Event Description:</label>"
-					+ "          <p id=\"eventDetails\">" + eventDescription + "</p>"
-					+ "        </div>\n"
-					+ "\n"
-					+ "		   <div>\n"
+			out.print(
+					"		   <div>\n"
 					+ "          <input type=\"submit\" value=\"Attend\" class=\"button\" name=\"attending\"/>\n"
 					+ "          <input type=\"submit\" value=\"Not Attend\" class=\"button\" name=\"attending\"/>\n"
-					+ "        </div>"
+					+ "        </div>\n"
 					+ "      </form>\n"
 					+ "    </div>\n"
 					+ "\n"
-					+ "    <script src=\"./FormHandler.js\"></script>\n"
 					+ "  </body>\n"
 					+ "</html>\n"
-					+ "");
+					+ ""
+					);
 		}
 		else {
 			if(eventAttendance.equals("Attend")) {
@@ -98,8 +106,15 @@ public class FormHandlerServlet extends HttpServlet {
 			else if(eventAttendance.equals("Not Attend")) {
 				numberOfPeopleNotAttending += 1;
 			}
-			out.println(numberOfPeopleAttending);
-			out.println(numberOfPeopleNotAttending);
+			out.print("</form>\n"
+					+ "</div>\n"
+					+ "\n"
+					+ "<h4> Number of People Attending: " + numberOfPeopleAttending + "</h4>"
+					+ "<h4> Number of People Not Attending: " + numberOfPeopleNotAttending + "</h4>"
+					+ "</body>\n"
+					+ "</html>\n"
+					+ ""
+					);
 		}
 		
 		out.close();
