@@ -83,6 +83,9 @@ public class FormHandlerServlet extends HttpServlet {
 			else eventData.put("not-attend-count", (int) eventData.get("not-attend-count") + 1);
 		}
 		
+		XMLManipulator xml = new XMLManipulator();
+		xml.writeToXMLFile(eventsData);
+		
 		request.getSession().setAttribute("events-data", eventsData);
 		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
 	}
