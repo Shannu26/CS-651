@@ -91,11 +91,11 @@ label {
   cursor: pointer;
 }
 
-#attending, #not-attending{
+#green, #red{
 	display: inline;
 	width: 200px;
 }
 
-#not-attending{
+#red{
 	background-color: red;
 }

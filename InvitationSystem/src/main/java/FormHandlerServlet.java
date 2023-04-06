@@ -51,14 +51,14 @@ public class FormHandlerServlet extends HttpServlet {
 		String eventTime = request.getParameter("event_time");
 		String eventLocation = request.getParameter("event_location");
 		String eventDescription = request.getParameter("event_description");
-		String eventAttendance = request.getParameter("attending");
+		String buttonValue = request.getParameter("button");
 		
 		ArrayList<HashMap<String, Object>> eventsData = new ArrayList<>();
 		if(request.getSession().getAttribute("events-data") != null) {
 			eventsData = (ArrayList<HashMap<String, Object>>) request.getSession().getAttribute("events-data");
 		}
 		
-		if(eventAttendance == null) {
+		if(buttonValue == null) {
 			HashMap<String, Object> eventData = new HashMap<String, Object>();
 			eventData.put("event-index", eventsData.size());
 			eventData.put("event-creator", eventCreator);
@@ -72,10 +72,14 @@ public class FormHandlerServlet extends HttpServlet {
 			
 			eventsData.add(eventData);
 		}
+		else if(buttonValue.equals("Delete")) {
+			int index = Integer.parseInt(eventIndex);
+			eventsData.remove(index);
+		}
 		else {
 			int index = Integer.parseInt(eventIndex);
 			HashMap<String, Object> eventData = eventsData.get(index);
-			if(eventAttendance.equals("Attend")) eventData.put("attend-count", (int) eventData.get("attend-count") + 1);
+			if(buttonValue.equals("Attend")) eventData.put("attend-count", (int) eventData.get("attend-count") + 1);
 			else eventData.put("not-attend-count", (int) eventData.get("not-attend-count") + 1);
 		}
 		

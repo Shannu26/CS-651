@@ -3,6 +3,8 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Arrays"%>
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,11 +24,25 @@
 	<a href="LoginServlet">Restart</a>
 	<a href="FormHandlerServlet">Add Event</a>
 	<div class="events-data">
+	<%!
+		class EventComparator implements Comparator<HashMap<String, Object>>{
+			public int compare(HashMap<String, Object> event1, HashMap<String, Object> event2){
+				int value1 = (int) event1.get("attend-count");
+				int value2 = (int) event2.get("attend-count");
+			
+				if(value1 > value2) return -1;
+				else if(value1 == value2) return 0;
+				return 1;
+			}
+		}
+	%>
 	<%
 		ArrayList<HashMap<String, Object>> eventsData = new ArrayList<>();
 		if(request.getSession().getAttribute("events-data") != null) {
 			eventsData = (ArrayList<HashMap<String, Object>>) request.getSession().getAttribute("events-data");
 		}
+		
+		Collections.sort(eventsData, new EventComparator());
 			
 		for(int i = 0;i < eventsData.size();i++){
 			HashMap<String, Object> eventData = eventsData.get(i);
@@ -73,8 +89,12 @@
 				if(!eventCreator.equals("You")){
 			%>
 			<div>
-				<input type="submit" value="Attend" class="button" id="attending" name="attending"/>
-				<input type="submit" value="Not Attend" class="button" id="not-attending" name="attending"/>
+				<input type="submit" value="Attend" class="button" id="green" name="button"/>
+				<input type="submit" value="Not Attend" class="button" id="red" name="button"/>
+			</div>
+			<% } else { %>
+			<div>
+				<input type="submit" value="Delete" class="button" id="green" name="button"/>
 			</div>
 			<% } %>
 			<div>
