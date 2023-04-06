@@ -12,7 +12,11 @@
       <form action="LoginServlet" method="POST" id="login-form">
         <div>
           <label>User Name:</label>
-          <input type="text" id="name" name="user-name" value="" />
+          <input type="text" id="name" name="user-name" value="" required/>
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" id="password" name="password" value="" required/>
         </div>
 
         <div class="button-container">

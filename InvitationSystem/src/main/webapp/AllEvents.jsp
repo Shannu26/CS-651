@@ -27,8 +27,8 @@
 	<%!
 		class EventComparator implements Comparator<HashMap<String, Object>>{
 			public int compare(HashMap<String, Object> event1, HashMap<String, Object> event2){
-				int value1 = (int) event1.get("attend-count");
-				int value2 = (int) event2.get("attend-count");
+				int value1 = Integer.parseInt((String) event1.get("attend-count"));
+				int value2 = Integer.parseInt((String) event2.get("attend-count"));
 			
 				if(value1 > value2) return -1;
 				else if(value1 == value2) return 0;
@@ -46,21 +46,22 @@
 			
 		for(int i = 0;i < eventsData.size();i++){
 			HashMap<String, Object> eventData = eventsData.get(i);
+			int eventIndex = Integer.parseInt((String) eventData.get("event-index"));
 			String eventName = (String) eventData.get("event-name");
 			String eventCreator = (String) eventData.get("event-creator");
 			String eventDate = (String) eventData.get("event-date");
 			String eventTime = (String) eventData.get("event-time");
 			String eventLocation = (String) eventData.get("event-location");
 			String eventDescription = (String) eventData.get("event-description");
-			int numberOfPeopleAttending = (int) eventData.get("attend-count");
-			int numberOfPeopleNotAttending = (int) eventData.get("not-attend-count");
+			int numberOfPeopleAttending = Integer.parseInt((String) eventData.get("attend-count"));
+			int numberOfPeopleNotAttending = Integer.parseInt((String) eventData.get("not-attend-count"));
 			
 			if(eventCreator.equals(userName)) eventCreator = "You";
 	%>
 	<div class="event-data">
 		<form action="FormHandlerServlet" method="POST" id="event-form">
 			
-			<input type="hidden" name="event_index" value=<%= i %> id="eventDetails" readonly/>
+			<input type="hidden" name="event_index" value=<%= eventIndex %> id="eventDetails" readonly/>
 			<div>
 				<label>Created By:</label>
 				<input type="text" name="event_name" value=<%= eventCreator %> id="eventDetails" readonly />

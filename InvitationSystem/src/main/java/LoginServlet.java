@@ -37,9 +37,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getSession().setAttribute("user-name", request.getParameter("user-name"));
-		System.out.println(request.getParameter("user-name"));
-		System.out.println(request.getSession().getAttribute("user-name"));
-		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
+		request.getSession().setAttribute("password", request.getParameter("password"));
+		request.getRequestDispatcher("AllEvents").forward(request, response);
 	}
 
 }

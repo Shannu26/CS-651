@@ -44,6 +44,10 @@ public class FormHandlerServlet extends HttpServlet {
 			request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
 		}
 		
+		XMLManipulator xml = new XMLManipulator();
+		xml.readFromXMLFile();
+		
+		
 		String eventIndex = request.getParameter("event_index");
 		String eventCreator = (String) request.getSession().getAttribute("user-name");
 		String eventName = request.getParameter("event_name");
@@ -54,21 +58,21 @@ public class FormHandlerServlet extends HttpServlet {
 		String buttonValue = request.getParameter("button");
 		
 		ArrayList<HashMap<String, Object>> eventsData = new ArrayList<>();
-		if(request.getSession().getAttribute("events-data") != null) {
-			eventsData = (ArrayList<HashMap<String, Object>>) request.getSession().getAttribute("events-data");
+		if(XMLManipulator.readFromXMLFile() != null) {
+			eventsData = XMLManipulator.readFromXMLFile();
 		}
 		
 		if(buttonValue == null) {
 			HashMap<String, Object> eventData = new HashMap<String, Object>();
-			eventData.put("event-index", eventsData.size());
+			eventData.put("event-index", Integer.toString(eventsData.size()));
 			eventData.put("event-creator", eventCreator);
 			eventData.put("event-name", eventName);
 			eventData.put("event-date", eventDate);
 			eventData.put("event-time", eventTime);
 			eventData.put("event-location", eventLocation);
 			eventData.put("event-description", eventDescription);
-			eventData.put("attend-count", 0);
-			eventData.put("not-attend-count", 0);
+			eventData.put("attend-count", "0");
+			eventData.put("not-attend-count", "0");
 			
 			eventsData.add(eventData);
 		}
@@ -79,15 +83,14 @@ public class FormHandlerServlet extends HttpServlet {
 		else {
 			int index = Integer.parseInt(eventIndex);
 			HashMap<String, Object> eventData = eventsData.get(index);
-			if(buttonValue.equals("Attend")) eventData.put("attend-count", (int) eventData.get("attend-count") + 1);
-			else eventData.put("not-attend-count", (int) eventData.get("not-attend-count") + 1);
+			if(buttonValue.equals("Attend")) eventData.put("attend-count", Integer.toString(Integer.parseInt((String) eventData.get("attend-count")) + 1));
+			else eventData.put("not-attend-count", Integer.toString(Integer.parseInt((String) eventData.get("not-attend-count")) + 1));
 		}
 		
-		XMLManipulator xml = new XMLManipulator();
 		xml.writeToXMLFile(eventsData);
 		
 		request.getSession().setAttribute("events-data", eventsData);
-		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
+		request.getRequestDispatcher("AllEvents").forward(request, response);
 	}
 
 }

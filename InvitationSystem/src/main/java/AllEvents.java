@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +30,11 @@ public class AllEvents extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ArrayList<HashMap<String, Object>> eventsData = new ArrayList<>();
+		if(XMLManipulator.readFromXMLFile() != null) {
+			eventsData = XMLManipulator.readFromXMLFile();
+		}
+		request.getSession().setAttribute("events-data", eventsData);
 		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
 	}
 
