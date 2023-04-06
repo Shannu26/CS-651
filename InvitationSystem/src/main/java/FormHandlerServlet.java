@@ -2,6 +2,10 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +26,7 @@ public class FormHandlerServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    int numberOfPeopleAttending = 0;
-    int numberOfPeopleNotAttending = 0;
+    ArrayList<HashMap<String, Object>> eventData = new ArrayList<HashMap<String, Object>>();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +41,8 @@ public class FormHandlerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String eventIndex = request.getParameter("event_index");
+		String eventCreator = (String) request.getSession().getAttribute("user-name");
 		String eventName = request.getParameter("event_name");
 		String eventDate = request.getParameter("event_date");
 		String eventTime = request.getParameter("event_time");
@@ -45,26 +50,38 @@ public class FormHandlerServlet extends HttpServlet {
 		String eventDescription = request.getParameter("event_description");
 		String eventAttendance = request.getParameter("attending");
 		
-		request.setAttribute("event_name", eventName);
-		request.setAttribute("event_date", eventDate);
-		request.setAttribute("event_time", eventTime);
-		request.setAttribute("event_location", eventLocation);
-		request.setAttribute("event_description", eventDescription);
+		int numberOfPeopleAttending = 0;
+	    int numberOfPeopleNotAttending = 0;
+		
+		ArrayList<HashMap<String, Object>> eventsData = new ArrayList<>();
+		if(request.getSession().getAttribute("events-data") != null) {
+			eventsData = (ArrayList<HashMap<String, Object>>) request.getSession().getAttribute("events-data");
+		}
 		
 		if(eventAttendance == null) {
-			request.getRequestDispatcher("EventAttendance.jsp").forward(request, response);
+			HashMap<String, Object> eventData = new HashMap<String, Object>();
+			eventData.put("event-index", eventsData.size());
+			eventData.put("event-creator", eventCreator);
+			eventData.put("event-name", eventName);
+			eventData.put("event-date", eventDate);
+			eventData.put("event-time", eventTime);
+			eventData.put("event-location", eventLocation);
+			eventData.put("event-description", eventDescription);
+			eventData.put("attend-count", 0);
+			eventData.put("not-attend-count", 0);
+			
+			eventsData.add(eventData);
 		}
 		else {
-			if(eventAttendance.equals("Attend")) {
-				numberOfPeopleAttending += 1;
-			}
-			else if(eventAttendance.equals("Not Attend")) {
-				numberOfPeopleNotAttending += 1;
-			}
-			request.setAttribute("attending", numberOfPeopleAttending);
-			request.setAttribute("not-attending", numberOfPeopleNotAttending);
-			request.getRequestDispatcher("EventConfirmation.jsp").forward(request, response);
+			int index = Integer.parseInt(eventIndex);
+			HashMap<String, Object> eventData = eventsData.get(index);
+			if(eventAttendance.equals("Attend")) eventData.put("attend-count", (int) eventData.get("attend-count") + 1);
+			else eventData.put("not-attend-count", (int) eventData.get("not-attend-count") + 1);
 		}
+		
+		request.getSession().setAttribute("events-data", eventsData);
+		
+		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
 	}
 
 }

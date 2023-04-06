@@ -2,6 +2,22 @@ h1 {
   text-align: center;
 }
 
+.event-data{
+	margin: 1%;
+}
+
+.event-data form{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.event-data form div{
+	display: inline;
+	margin: 0;
+	margin-left: 1%;
+}
+
 #eventDetails, span{
 	display: inline;
 	color: red;

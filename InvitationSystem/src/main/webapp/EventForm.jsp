@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="./FormHandler.css" />
   </head>
   <body>
+    <%
+    	if(request.getSession().getAttribute("user-name") == null) {
+			request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
+		}
+    	String userName = (String) request.getSession().getAttribute("user-name");
+    %>
+    <h4>Current Logged User: <span><%= userName %></span></h4>
     <h1>Invitation System</h1>
     <div class="form-container">
       <form action="FormHandlerServlet" method="POST" id="event-form">
