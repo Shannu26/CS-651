@@ -1,6 +1,9 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ItemsServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ItemsServlet")
+public class ItemsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public ItemsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +30,15 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().setAttribute("user-name", null);
-		response.sendRedirect("LoginForm.jsp");
+		HashMap<String, Integer> items = new HashMap<String, Integer>();
+		items.put("Shirt", 100);
+		items.put("Pant", 80);
+		items.put("Shoes", 90);
+		items.put("Tie", 30);
+		items.put("Belt", 30);
+		
+		request.getSession().setAttribute("items", items);
+		request.getRequestDispatcher("items.jsp").forward(request, response);
 	}
 
 	/**
@@ -36,10 +46,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getSession().setAttribute("user-name", request.getParameter("user-name"));
-		System.out.println(request.getParameter("user-name"));
-		System.out.println(request.getSession().getAttribute("user-name"));
-		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
+		doGet(request, response);
 	}
 
 }

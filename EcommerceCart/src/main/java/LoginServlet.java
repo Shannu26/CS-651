@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AllEvents
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/AllEvents")
-public class AllEvents extends HttpServlet {
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllEvents() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class AllEvents extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("AllEvents.jsp").forward(request, response);
+		response.sendRedirect("login.html");
 	}
 
 	/**
@@ -35,7 +35,8 @@ public class AllEvents extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.getSession().setAttribute("user-name", request.getParameter("user-name"));
+		response.sendRedirect("ItemsServlet");
 	}
 
 }
