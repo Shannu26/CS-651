@@ -15,6 +15,7 @@
 	<%
 		HashMap<String, Integer> items = (HashMap<String, Integer>)request.getSession().getAttribute("items");
 	%>
+	<a href="CartServlet" class="button">Go To Cart</a>
 	<div class="item-container">
 		<%
 			for(Entry<String, Integer> item: items.entrySet()){

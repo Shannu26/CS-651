@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-h1 {
+h1, h2 {
   text-align: center;
 }
 
@@ -58,4 +58,24 @@ label {
 .item-container form{
 	width: 90%;
 	margin: 2%;
+}
+
+.invoice{
+	width: 20%;
+	border: 3px dotted black;
+	margin-left: 40vw;
+}
+
+.invoice *{
+	margin: 1%;
+	font-size: 25px;
+}
+
+.invoice p{
+	text-align: right;
+	margin-right: 1%;
+}
+
+td{
+	padding: 5px;
 }

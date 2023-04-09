@@ -30,6 +30,7 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		this.cartItems = (HashMap<String, Integer[]>) request.getSession().getAttribute("cart-items");
 		request.getRequestDispatcher("cart.jsp").forward(request, response);
 	}
 
@@ -38,6 +39,8 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		this.cartItems = (HashMap<String, Integer[]>) request.getSession().getAttribute("cart-items");
 		String itemName = request.getParameter("item-name");
 		int itemPrice = Integer.parseInt(request.getParameter("item-price"));
 		int itemQuantity = Integer.parseInt(request.getParameter("item-quantity"));
